@@ -22,6 +22,8 @@ int main() {
 
     endwin();  // End ncurses mode
 
-    std::cout << "Game Over!" << std::endl;
+    std::cout << "Game Over! Press any key to exit." << std::endl;
+    std::cin.get();
     return 0;
+
 }

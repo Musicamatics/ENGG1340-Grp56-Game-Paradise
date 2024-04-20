@@ -24,6 +24,8 @@ enum class Direction {
     RIGHT
 };
 
+struct Game;
+
 struct Snake {
     Point head;
     std::vector<Point> body;
@@ -33,7 +35,7 @@ struct Snake {
 
     void ChangeDirection(Direction newDirection);
     void EatFruit();
-    bool CheckCollision(const Game& game);
+    bool CheckCollision(const Game& game); // Now the compiler knows that Game is a type
     void Move();
 };
 
@@ -44,7 +46,7 @@ struct Game {
     int height;
     bool over;
 
-    Game();
+    Game() : over(false) {} // Add this line
 };
 
 
