@@ -16,7 +16,7 @@ int main() {
 
     while (!game.over) {
         RenderGame(game);
-        UserInput(game);  // Use UserInput instead of HandleUserInput
+        UserInput(game);
         UpdateGame(game);
     }
 
@@ -25,5 +25,5 @@ int main() {
     std::cout << "Game Over! Press any key to exit." << std::endl;
     std::cin.get();
     return 0;
-
 }
+
