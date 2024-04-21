@@ -1,4 +1,5 @@
 #include "snake.h"
+#include <ncurses.h>
 #include <iostream>
 using namespace std;
 
@@ -89,53 +90,64 @@ void UpdateGame(Game& game) {
 
     if (game.snake.head.x == game.fruit.x && game.snake.head.y == game.fruit.y) {
         game.snake.EatFruit(); // Let the snake eat the fruit
+
+        // Add a new segment to the snake's body (growing the snake)
+        Point newSegment = game.snake.body.empty() ? game.snake.head : game.snake.body.back();
+        game.snake.body.push_back(newSegment);
+
+        // Generate new coordinates for the fruit
         game.fruit.x = rand() % game.width;
         game.fruit.y = rand() % game.height;
     }
 }
 
+
+
+
 void RenderGame(const Game& game) {
-    // Clear the terminal
-    system("clear");
+    clear();  // Clear the screen
 
     // Print the top border
     for (int i = 0; i < game.width + 2; ++i) {
-        std::cout << "#";
+        printw("#");
     }
-    std::cout << "\n";
+    printw("\n");
 
     // Print the game board
     for (int y = 0; y < game.height; ++y) {
-        std::cout << "#";  // Print the left border
+        printw("#");  // Print the left border
         for (int x = 0; x < game.width; ++x) {
             Point p = {x, y};
             if (p == game.snake.head) {
-                std::cout << "O";  // Print the snake's head
+                printw("O");  // Print the snake's head
             } else if (p == game.fruit) {
-                std::cout << "F";  // Print the fruit
+                printw("F");  // Print the fruit
             } else {
                 bool printed = false;
                 for (const Point& part : game.snake.body) {
                     if (part != game.snake.head && p == part) {
-                        std::cout << "o";  // Print the snake's body
+                        printw("o");  // Print the snake's body
                         printed = true;
                         break;
                     }
                 }
                 if (!printed) {
-                    std::cout << " ";  // Print an empty space
+                    printw(" ");  // Print an empty space
                 }
             }
         }
-        std::cout << "#\n";  // Print the right border and move to the next line
+        printw("#\n");  // Print the right border and move to the next line
     }
 
     // Print the bottom border
     for (int i = 0; i < game.width + 2; ++i) {
-        std::cout << "#";
+        printw("#");
     }
-    std::cout << "\n";
+    printw("\n");
+
+    refresh();  // Refresh the screen to show the changes
 }
+
 
 
 int SetDifficulty() {
