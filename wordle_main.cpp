@@ -26,6 +26,21 @@ int main() {
     string filepath = "/usr/share/dict/words";
     bool b = loaddict(filepath, mydict);
 
+    cout << "Welcome to WORDLE!" << endl << "These are the rules of the game!";
+    sleep(1)
+        return 0;
+    cout << "Wordle is a simple game in which you have to guess a five-letter word." << endl;
+    cout << "Each guess must be a valid word." << endl;
+    cout << "The colour of the tile will change to show you how close your guess was." << endl;
+    cout << "A GREEN tile means that the letter is in the word AND in the right spot." << endl;
+    cout << "A YELLOW tile means that the letter is in the word BUT NOT in the right spot." << endl;
+    cout << "A GRAY tile means that the letter is NOT in the word." << endl;
+    
+        
+        
+    
+    
+
     while(input1 != "Q"){
         do{
             if(num_of_games > 0){
