@@ -30,17 +30,17 @@ int main() {
     sleep(1)
         return 0;
     cout << "Wordle is a simple game in which you have to guess a five-letter word." << endl;
-    cout << "Each guess must be a valid word." << endl;
+    cout << "You have 6 tries only. Each 5-word guess must be a valid word." << endl;
+    sleep(1)
+        return 0;
     cout << "The colour of the tile will change to show you how close your guess was." << endl;
     cout << "A GREEN tile means that the letter is in the word AND in the right spot." << endl;
     cout << "A YELLOW tile means that the letter is in the word BUT NOT in the right spot." << endl;
     cout << "A GRAY tile means that the letter is NOT in the word." << endl;
+    sleep(1)
+        return 0;
+    cout << "Good luck with your guesses!" << endl;
     
-        
-        
-    
-    
-
     while(input1 != "Q"){
         do{
             if(num_of_games > 0){
@@ -54,9 +54,11 @@ int main() {
             break;
         }
         if(input1 == "Y"){
-            dictPair word_int = generateword(mydict);
-            word = word_int.dictword;
-            toLowerCase(word);
+            if(b){
+                dictPair word_int = generateword(mydict);
+                word = word_int.dictword;
+                toLowerCase(word);
+            }
             currentTry = 0;
             while(currentTry < num_of_tries){
                 do{
