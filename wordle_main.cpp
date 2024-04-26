@@ -8,6 +8,7 @@
 #include <list>
 #include <random>
 #include "wordle.h"
+#include <unistd.h>
 using namespace std;
 
 int main() {
@@ -26,19 +27,16 @@ int main() {
     string filepath = "/usr/share/dict/words";
     bool b = loaddict(filepath, mydict);
 
-    cout << "Welcome to WORDLE!" << endl << "These are the rules of the game!";
-    sleep(1)
-        return 0;
+    cout << "Welcome to WORDLE!" << endl << "These are the rules of the game! " << endl << endl;
+    sleep(1);
     cout << "Wordle is a simple game in which you have to guess a five-letter word." << endl;
-    cout << "You have 6 tries only. Each 5-word guess must be a valid word." << endl;
-    sleep(1)
-        return 0;
+    cout << "You have 6 tries only. Each 5-word guess must be a valid word." << endl << endl;
+    sleep(1);
     cout << "The colour of the tile will change to show you how close your guess was." << endl;
-    cout << "A GREEN tile means that the letter is in the word AND in the right spot." << endl;
-    cout << "A YELLOW tile means that the letter is in the word BUT NOT in the right spot." << endl;
-    cout << "A GRAY tile means that the letter is NOT in the word." << endl;
-    sleep(1)
-        return 0;
+    cout << "A " << BLACK << B_GREEN << "GREEN" << RESET << " tile means that the letter is in the word AND in the right spot." << endl;
+    cout << "A "  << BLACK << B_YELLOW << "YELLOW" << RESET << " tile means that the letter is in the word BUT NOT in the right spot." << endl;
+    cout << "A " << BLACK << B_GRAY << "GRAY" << RESET << " tile means that the letter is NOT in the word." << endl << endl;
+    sleep(1);
     cout << "Good luck with your guesses!" << endl;
     
     while(input1 != "Q"){
