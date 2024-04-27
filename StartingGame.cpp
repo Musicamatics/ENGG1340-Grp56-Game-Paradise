@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <cstdlib>
+#include <fstream>
 using namespace std;
 
 void print(string str)
@@ -21,6 +23,7 @@ int main()
             input_check=false;
         }
     }
+    cout<<"Welcome! "<<user<<endl;
 
     bool choose=true;
     string chosen;
@@ -42,9 +45,25 @@ int main()
         }
         else
         {
-            print("Loading Wordle")
+            print("Loading Wordle");
             choose=false;
         }
+    }
+    if (chosen=="1")
+    {
+        system("g++ -Wall -Wextra -pedantic -std=c++11 -c main.cpp");
+        system("g++ -Wall -Wextra -pedantic -std=c++11 -c snake.cpp");
+        system("g++ -Wall -Wextra -pedantic -std=c++11 -c userinput.cpp");
+        system("g++ -Wall -Wextra -pedantic -std=c++11 -o snake main.o snake.o userinput.o -lncurses");
+        system("./snake")
+    }
+    else
+    {
+        system("g++ -Wall -Wextra -pedantic -std=c++11 -c wordle_main.cpp");
+        system("g++ -Wall -Wextra -pedantic -std=c++11 -c wordle.cpp");
+        system("g++ -Wall -Wextra -pedantic -std=c++11 -o wordle wordle_main.o wordle.o");
+        system("./wordle");
+    }
         
     return 0;
 }
