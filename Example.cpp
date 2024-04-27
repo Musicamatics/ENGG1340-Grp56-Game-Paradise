@@ -208,6 +208,7 @@ int main()
     bool check_again=true;
     while (check_again)
     {   
+        check_input=true;
         while (check_input)
         {
             cout<<"Choose a difficulty level: (1/2/3)"<<cout;
@@ -223,13 +224,13 @@ int main()
 
         switch (difficult)
         {
-            case 1:
+            case "1":
                 speed=20;
                 break;
-            case 2:
+            case "2":
                 speed=40;
                 break;
-            case 3:
+            case "3":
                 speed=60;
                 break;
         }
