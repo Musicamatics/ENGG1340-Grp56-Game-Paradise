@@ -89,35 +89,14 @@ void printing(string user)
 
 void fruit()
 {
-    bool eaten = false;
-    if (snake_x[0] == fruit_x && snake_y[0] == fruit_y)
+    if (snake_x[0]==fruit_x && snake_y[0]==fruit_y)
     {
-        switch (window[fruit_x][fruit_y])
-        {
-        case 'A':
-            score += 1;
-            length += 1;
-            break;
-        case 'B':
-            score += 2;
-            length += 1;
-            break;
-        }
-       fruit_x = rand() % 23 + 1;
-        fruit_y = rand() % 73 + 1;
-        eaten = true;
+        fruit_x=rand()%23+1;
+        fruit_y=rand()%23+1;
+        score+=1;
+        length+=1;
     }
-    if (eaten)
-    {
-        if (rand() % 4 == 0)
-        {
-            window[fruit_x][fruit_y] = 'B';
-        }
-        else
-        {
-            window[fruit_x][fruit_y] = 'A';
-        }
-    }
+    window[fruit_x][fruit_y]='X';
 }
 
 void snake(char skin)
@@ -159,6 +138,10 @@ void play(char skin, string user, int speed)
     score = 0;
     snake_x[0] = 12;
     snake_y[0] = 32;
+    window[fruit_x][fruit_y]=' ';
+    fruit_x = rand() % 23 + 1;
+    fruit_y = rand() % 73 + 1;
+    contin=true
     printing(user);
     while (contin)
     {
@@ -177,8 +160,6 @@ int main()
     string user, sure, wait_to_start;
     int speed;
     bool makesure = true;
-    fruit_x = rand() % 23 + 1;
-    fruit_y = rand() % 73 + 1;
 
     while (makesure)
     {
@@ -227,13 +208,13 @@ int main()
         switch (difficulty)
         {
             case '1':
-                speed=200;
+                speed=250;
                 break;
             case '2':
-                speed=150;
+                speed=200;
                 break;
             case '3':
-                speed=100;
+                speed=120;
                 break;
         }
 
