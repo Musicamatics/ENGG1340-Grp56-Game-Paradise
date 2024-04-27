@@ -167,7 +167,7 @@ bool play(char skin, string user, int speed)
         Sleep(speed);
         crash();
     }
-    return true
+    return true;
 }
 
 int main()
@@ -205,7 +205,8 @@ int main()
 
     string difficult;
     bool check_input=true;
-    while (again)
+    bool check_again=true;
+    while (check_again)
     {   
         while (check_input)
         {
@@ -213,7 +214,7 @@ int main()
             cin>>difficult;
             if (!difficult.empty())
             {
-                if (difficult==1 || difficult==2 || difficult==3)
+                if (difficult=="1" || difficult=="2" || difficult=="3")
                 {
                     check_input=false;
                 }
@@ -238,7 +239,7 @@ int main()
         
         play(skin, user, speed);
             
-        check_input=true;
+        check_input = true;
         while(check_input)
         {
             cout<< "Play again? (Yes: Y, No: N)"<<endl;
