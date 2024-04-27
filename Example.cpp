@@ -211,14 +211,11 @@ int main()
         check_input=true;
         while (check_input)
         {
-            cout<<"Choose a difficulty level: (1/2/3)"<<cout;
+            cout<<"Choose a difficulty level: (1/2/3)"<<endl;
             cin>>difficulty;
-            if (!difficulty.empty())
+            if (difficulty=='1' || difficulty=='2' || difficulty=='3')
             {
-                if (difficulty=='1' || difficulty=='2' || difficulty=='3')
-                {
-                    check_input=false;
-                }
+                check_input=false;
             }
         }
 
@@ -244,21 +241,14 @@ int main()
         while(check_input)
         {
             cout<< "Play again? (Yes: Y, No: N)"<<endl;
-            getline(cin, again);
-            if (!again.empty())
+            cin>>again;
+            if (again!='y' && again!='Y' && again!='n' && again!='N')
             {
-                if (again!='y' && again!='Y' && again!='n' && again!='N')
-                {
-                    cout<<"Invalid Input!! Please enter again!"<<endl;
-                }
-                else
-                {
-                    check_input=false;
-                }
+                cout<<"Invalid Input!! Please enter again!"<<endl;
             }
             else
             {
-                cout<<"No Input!! Please enter again!!"<<endl;
+                check_input=false;
             }
         }
 
