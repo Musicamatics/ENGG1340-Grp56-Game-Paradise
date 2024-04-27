@@ -171,8 +171,8 @@ void play(char skin, string user, int speed)
 
 int main()
 {
-    char skin, again;
-    string user, sure, wait_to_start;
+    char skin;
+    string user, sure, wait_to_start, again;
     int speed;
     bool makesure = true;
     fruit_x = rand() % 23 + 1;
@@ -202,7 +202,7 @@ int main()
         cin >> skin;
     }
 
-    string difficult;
+    string difficulty;
     bool check_input=true;
     bool check_again=true;
     while (check_again)
@@ -211,17 +211,17 @@ int main()
         while (check_input)
         {
             cout<<"Choose a difficulty level: (1/2/3)"<<cout;
-            cin>>difficult;
-            if (!difficult.empty())
+            getline(cin, difficulty);
+            if (!difficulty.empty())
             {
-                if (difficult=="1" || difficult=="2" || difficult=="3")
+                if (difficulty=="1" || difficulty=="2" || difficulty=="3")
                 {
                     check_input=false;
                 }
             }
         }
 
-        switch (difficult)
+        switch (difficulty)
         {
             case "1":
                 speed=20;
@@ -243,7 +243,7 @@ int main()
         while(check_input)
         {
             cout<< "Play again? (Yes: Y, No: N)"<<endl;
-            cin>>again;
+            getline(cin, again);
             if (!again.empty())
             {
                 if (again!='y' && again!='Y' && again!='n' && again!='N')
@@ -263,12 +263,12 @@ int main()
 
         switch(again)
         {
-            case 'Y':
-            case 'y':
+            case "Y":
+            case "y":
                 check_again=true;     
                 break;
-            case 'N':
-            case 'n':
+            case "N":
+            case "n":
                 check_again=false;
                 cout<<"Bye Bye~"<<endl;
                 break;
