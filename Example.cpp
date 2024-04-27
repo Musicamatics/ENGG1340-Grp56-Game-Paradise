@@ -96,7 +96,7 @@ void fruit()
         score+=1;
         length+=1;
     }
-    window[fruit_x][fruit_y]='X';
+    window[fruit_x][fruit_y]='@';
 }
 
 void snake(char skin)
