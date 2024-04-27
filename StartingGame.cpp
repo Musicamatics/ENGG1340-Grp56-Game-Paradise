@@ -2,29 +2,8 @@
 #include <string>
 #include <cstdlib>
 #include <fstream>
-#include <window.h>
-#include <cinio.h>
 
 using namespace std;
-char window[25][75];
-
-void setwindow()
-{
-    for (int i = 0; i < 25; i++)
-    {
-        for (int j = 0; j < 75; j++)
-        {
-            if (i == 0 || i == 24 || j == 0 || j == 74)
-            {
-                window[i][j] = '#';
-            }
-            else
-            {
-                window[i][j] = ' ';
-            }
-        }
-    }
-}
 
 
 void print(const string& str)
@@ -35,7 +14,16 @@ void print(const string& str)
 int main()
 {
     bool input_check = true;
-    string user;
+    string user, makesure;
+    print("#######################################");
+    print("#                                 十  #");
+    print("#      ######     ######        %%%%%%#");
+    print("#     #           #     #      %   %  #");
+    print("#     #    ##     ######      %%%%%%%%#");
+    print("#     #     #     #            %      #");
+    print("#     #######     #           ［      #");
+    print("#                            %%%%%%%%%#");
+    print("#######################################");
     print("Welcome to GameParadise!");
     print("Please enter your name:");
     while (input_check)
@@ -43,7 +31,12 @@ int main()
         getline(cin, user);
         if (!user.empty())
         {
-            input_check = false;
+            cout<<"Do you sure your name is "<<user<<"?  (Yes: Y/ N: Any other key)"<<endl;
+            getline(cin, makesure);
+            if (makesure=="y" || makesure=="Y")
+            {
+                input_check=false;
+            }
         }
     }
     cout << "Welcome, " << user << " !" << endl;
@@ -53,13 +46,18 @@ int main()
     while (choose)
     {
         print("Please choose a game to play:");
-        print("1) Snake Game    (Enter 1)");
-        print("2) Wordle        (Enter 2)");
+        print(" 一一一一一一一一一一一一一一一一一");
+        print("| 1) Snake Game    (Enter 1) |");
+        print("|                            |");
+        print("| 2) Wordle        (Enter 2) |");
+        print(" 一一一一一一一一一一一一一一一一一");
         getline(cin, chosen);
         if (chosen != "1" && chosen != "2")
         {
             print("Invalid Input!!");
             print("Please try again!");
+            print("");
+            print("");
         }
         else
         {
