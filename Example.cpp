@@ -152,7 +152,7 @@ void crash()
     }
 }
 
-bool play(char skin, string user, int speed)
+void play(char skin, string user, int speed)
 {
     setwindow();
     snake_x[0] = 12;
@@ -167,7 +167,6 @@ bool play(char skin, string user, int speed)
         Sleep(speed);
         crash();
     }
-    return true;
 }
 
 int main()
