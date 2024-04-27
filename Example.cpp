@@ -156,6 +156,7 @@ void play(char skin, string user, int speed)
 {
     setwindow();
     length = 1;
+    score = 0;
     snake_x[0] = 12;
     snake_y[0] = 32;
     printing(user);
@@ -226,13 +227,13 @@ int main()
         switch (difficulty)
         {
             case '1':
-                speed=10;
+                speed=200;
                 break;
             case '2':
-                speed=30;
+                speed=150;
                 break;
             case '3':
-                speed=60;
+                speed=100;
                 break;
         }
 
