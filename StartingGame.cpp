@@ -2,8 +2,30 @@
 #include <string>
 #include <cstdlib>
 #include <fstream>
+#include <window.h>
+#include <cinio.h>
 
 using namespace std;
+char window[25][75];
+
+void setwindow()
+{
+    for (int i = 0; i < 25; i++)
+    {
+        for (int j = 0; j < 75; j++)
+        {
+            if (i == 0 || i == 24 || j == 0 || j == 74)
+            {
+                window[i][j] = '#';
+            }
+            else
+            {
+                window[i][j] = ' ';
+            }
+        }
+    }
+}
+
 
 void print(const string& str)
 {
