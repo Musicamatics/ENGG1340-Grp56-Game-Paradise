@@ -184,9 +184,9 @@ int main()
         cout << "Please enter a name for your snake: " << endl;
         getline(cin, user);
         cout << "Do you sure that the name of your snake is " << user << endl;
-        cout << "Please enter (sure/ no):" << endl;
+        cout << "Please enter (Yes: y | No: Any Key):" << endl;
         getline(cin, sure);
-        if (sure == "sure")
+        if (sure == "y" or sure == "Y")
         {
             makesure = false;
         }
@@ -216,6 +216,9 @@ int main()
             if (difficulty=='1' || difficulty=='2' || difficulty=='3')
             {
                 check_input=false;
+            }
+            else
+            {
                 cout<<"Invalid Input!! Please enter again..."<<endl;
             }
         }
