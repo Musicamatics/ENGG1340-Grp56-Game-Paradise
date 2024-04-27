@@ -155,6 +155,7 @@ void crash()
 void play(char skin, string user, int speed)
 {
     setwindow();
+    length = 1;
     snake_x[0] = 12;
     snake_y[0] = 32;
     printing(user);
@@ -172,7 +173,7 @@ void play(char skin, string user, int speed)
 int main()
 {
     char skin;
-    string user, sure, wait_to_start, again;
+    string user, sure, wait_to_start;
     int speed;
     bool makesure = true;
     fruit_x = rand() % 23 + 1;
@@ -202,7 +203,7 @@ int main()
         cin >> skin;
     }
 
-    string difficulty;
+    char difficulty, again;
     bool check_input=true;
     bool check_again=true;
     while (check_again)
@@ -211,10 +212,10 @@ int main()
         while (check_input)
         {
             cout<<"Choose a difficulty level: (1/2/3)"<<cout;
-            getline(cin, difficulty);
+            cin>>difficulty;
             if (!difficulty.empty())
             {
-                if (difficulty=="1" || difficulty=="2" || difficulty=="3")
+                if (difficulty=='1' || difficulty=='2' || difficulty=='3')
                 {
                     check_input=false;
                 }
@@ -223,13 +224,13 @@ int main()
 
         switch (difficulty)
         {
-            case "1":
+            case '1':
                 speed=20;
                 break;
-            case "2":
+            case '2':
                 speed=40;
                 break;
-            case "3":
+            case '3':
                 speed=60;
                 break;
         }
@@ -263,12 +264,12 @@ int main()
 
         switch(again)
         {
-            case "Y":
-            case "y":
+            case 'Y':
+            case 'y':
                 check_again=true;     
                 break;
-            case "N":
-            case "n":
+            case 'N':
+            case 'n':
                 check_again=false;
                 cout<<"Bye Bye~"<<endl;
                 break;
