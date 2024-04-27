@@ -7,7 +7,7 @@ using namespace std;
 
 char window[25][75], inputting;
 int snake_x[100], snake_y[100], dir_x = 1, dir_y = 0;
-int fruit_x, fruit_y, length = 1, score = 0, speed = 60;
+int fruit_x, fruit_y, length = 1, score = 0;
 bool contin = true;
 
 void getkey()
@@ -152,10 +152,29 @@ void crash()
     }
 }
 
+bool play(char skin, string user, int speed)
+{
+    setwindow();
+    snake_x[0] = 12;
+    snake_y[0] = 32;
+    printing(user);
+    while (contin)
+    {
+        getkey();
+        snake(skin);
+        fruit();
+        printing(user);
+        Sleep(speed);
+        crash();
+    }
+    return true
+}
+
 int main()
 {
-    char skin;
-    string user, sure;
+    char skin, again;
+    string user, sure, wait_to_start;
+    int speed;
     bool makesure = true;
     fruit_x = rand() % 23 + 1;
     fruit_y = rand() % 73 + 1;
@@ -184,19 +203,75 @@ int main()
         cin >> skin;
     }
 
-    setwindow();
-    snake_x[0] = 12;
-    snake_y[0] = 32;
-    printing(user);
+    string difficult;
+    bool check_input=true;
+    while (again)
+    {   
+        while (check_input)
+        {
+            cout<<"Choose a difficulty level: (1/2/3)"<<cout;
+            cin>>difficult;
+            if (!difficult.empty())
+            {
+                if (difficult==1 || difficult==2 || difficult==3)
+                {
+                    check_input=false;
+                }
+            }
+        }
 
-    while (contin)
-    {
-        getkey();
-        snake(skin);
-        fruit();
-        printing(user);
-        Sleep(speed);
-        crash();
+        switch (difficult)
+        {
+            case 1:
+                speed=20;
+                break;
+            case 2:
+                speed=40;
+                break;
+            case 3:
+                speed=60;
+                break;
+        }
+
+        cout<<"Press any key to start..."<<endl;
+        cin>>wait_to_start;
+        
+        play(skin, user, speed);
+            
+        check_input=true;
+        while(check_input)
+        {
+            cout<< "Play again? (Yes: Y, No: N)"<<endl;
+            cin>>again;
+            if (!again.empty())
+            {
+                if (again!='y' && again!='Y' && again!='n' && again!='N')
+                {
+                    cout<<"Invalid Input!! Please enter again!"<<endl;
+                }
+                else
+                {
+                    check_input=false;
+                }
+            }
+            else
+            {
+                cout<<"No Input!! Please enter again!!"<<endl;
+            }
+        }
+
+        switch(again)
+        {
+            case 'Y':
+            case 'y':
+                check_again=true;     
+                break;
+            case 'N':
+            case 'n':
+                check_again=false;
+                cout<<"Bye Bye~"<<endl;
+                break;
+        }
     }
     return 0;
 }
