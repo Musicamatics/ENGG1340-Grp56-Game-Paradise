@@ -216,16 +216,17 @@ int main()
             if (difficulty=='1' || difficulty=='2' || difficulty=='3')
             {
                 check_input=false;
+                cout<<"Invalid Input!! Please enter again..."<<endl;
             }
         }
 
         switch (difficulty)
         {
             case '1':
-                speed=20;
+                speed=10;
                 break;
             case '2':
-                speed=40;
+                speed=30;
                 break;
             case '3':
                 speed=60;
@@ -240,6 +241,7 @@ int main()
         check_input = true;
         while(check_input)
         {
+            cout<<endl;
             cout<< "Play again? (Yes: Y, No: N)"<<endl;
             cin>>again;
             if (again!='y' && again!='Y' && again!='n' && again!='N')
