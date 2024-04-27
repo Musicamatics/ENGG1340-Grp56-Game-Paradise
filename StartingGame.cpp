@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void print(string str)
+void print(const string& str)
 {
     cout << str << endl;
 }
@@ -19,12 +19,12 @@ int main()
     while (input_check)
     {
         getline(cin, user);
-        if (user != "")
+        if (!user.empty())
         {
             input_check = false;
         }
     }
-    cout << "Welcome! " << user << endl;
+    cout << "Welcome, " << user << " !" << endl;
 
     bool choose = true;
     string chosen;
@@ -39,30 +39,22 @@ int main()
             print("Invalid Input!!");
             print("Please try again!");
         }
-        else if (chosen == "1")
-        {
-            print("Loading Snake Game...");
-            choose = false;
-        }
         else
         {
-            print("Loading Wordle");
             choose = false;
         }
     }
+
     if (chosen == "1")
     {
-        system("g++ -Wall -Wextra -pedantic -std=c++11 -c main.cpp");
-        system("g++ -Wall -Wextra -pedantic -std=c++11 -c snake.cpp");
-        system("g++ -Wall -Wextra -pedantic -std=c++11 -c userinput.cpp");
-        system("g++ -Wall -Wextra -pedantic -std=c++11 -o snake main.o snake.o userinput.o -lncurses");
+        print("Loading Snake Game...");
+        system("g++ -Wall -Wextra -pedantic -std=c++11 -o snake main.cpp snake.cpp userinput.cpp -lncurses");
         system("./snake");
     }
-    else
+    else if (chosen == "2")
     {
-        system("g++ -Wall -Wextra -pedantic -std=c++11 -c wordle_main.cpp");
-        system("g++ -Wall -Wextra -pedantic -std=c++11 -c wordle.cpp");
-        system("g++ -Wall -Wextra -pedantic -std=c++11 -o wordle wordle_main.o wordle.o");
+        print("Loading Wordle...");
+        system("g++ -Wall -Wextra -pedantic -std=c++11 -o wordle wordle_main.cpp wordle.cpp");
         system("./wordle");
     }
 
