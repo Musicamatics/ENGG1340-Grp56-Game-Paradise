@@ -70,6 +70,7 @@ void wordprinting( string line);
 void testingfindYs(string s1,string s2, vector<char> & charr, vector<bool> & found);
 void playwordle(string word, string input, vector<vector<char>> & charr, vector<vector<bool>> & found, int currentTry, vector<string> & tries);
 void printResults(vector<vector<char>> & charr, vector<vector<bool>> & found, vector<string> & tries);
+void playWordle();
 bool dictword(string curr_word, map<dictPair, string> & mapdict);
 
 #endif

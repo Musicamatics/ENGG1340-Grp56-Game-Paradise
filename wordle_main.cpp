@@ -11,7 +11,7 @@
 #include <unistd.h>
 using namespace std;
 
-int main() {
+void playWordle() {
     bool match;
     int len_of_words = 5;
     int num_of_tries = 6;
@@ -124,5 +124,5 @@ int main() {
         //cout << tries[i] << ' ';
     }
     //cout << endl;
-    return 0;
+    //return 0;
 }

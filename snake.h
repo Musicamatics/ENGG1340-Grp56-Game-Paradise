@@ -54,7 +54,7 @@ void InitializeGame(Game& game);
 void UpdateGame(Game& game);
 void RenderGame(const Game& game);
 void HandleUserInput(Game& game);
-
+void playSnakeGame();
 int SetDifficulty();
 void UserInput(Game& game);
 

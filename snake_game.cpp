@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-int main() {
+void playSnakeGame() {
     srand(time(NULL));
 
     initscr();  // Initialize ncurses
@@ -24,6 +24,4 @@ int main() {
 
     std::cout << "Game Over! Press any key to exit." << std::endl;
     std::cin.get();
-    return 0;
 }
-
