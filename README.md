@@ -113,7 +113,7 @@ In the Snake game, dynamic memory management is crucial for handling the snake's
 - Utilizing the `std::vector` container from the C++ Standard Library for dynamic array management.
 - The `std::vector` dynamically allocates memory as needed, resizing itself to accommodate new elements.
 
-**Example Implementation**:
+**Implementation**:
 ```cpp
 struct Snake {
     Point head;
@@ -147,7 +147,7 @@ In the Snake game, file input/output is utilized to manage the highest score. Th
 **Corresponding Coding Element**:
 - Utilizing the `std::ifstream` and `std::ofstream` classes for file input/output operations.
 
-**Example Implementation**:
+**Implementation**:
 ```cpp
 // Read the highest score from a file
 int ReadHighestScore() {
@@ -170,7 +170,8 @@ void WriteHighestScore(int highestScore) {
 
 These functions facilitate persistent storage of the highest score across game sessions, enhancing the gameplay experience by maintaining a record of the player's achievements.
 
-### Data structures for storing game status: The Game structure stores the game status, including the snake's position and direction, the fruit's position, and the score. The Snake structure uses a std::vector (an STL container) to store the body of the snake.
+### Data structures for storing game status:
+The Game structure stores the game status, including the snake's position and direction, the fruit's position, and the score. The Snake structure uses a std::vector (an STL container) to store the body of the snake.
 
 ## Installation
 To compile the game, you need a C++ compiler that supports C++11. Here's the compilation command:
