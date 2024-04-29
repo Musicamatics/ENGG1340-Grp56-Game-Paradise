@@ -31,4 +31,14 @@ To start the game, execute the following command:
 
 **Note:** This game is recommended for Linux environments.
 
-Enjoy playing!
+## Contributions:
+### Wordle:
+@yburnachs
+@youarethexie
+
+### Snake Game:
+@Musicamatics
+@FungCT
+@LeungLongHey
+
+## Enjoy playing!
