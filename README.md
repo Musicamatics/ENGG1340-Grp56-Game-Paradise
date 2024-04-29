@@ -24,7 +24,7 @@ An implementation of the classic Snake Game, which originated as Blockade, an ar
 
 
 ## List of Features
-### Wordle:
+### [Wordle]
 
 ### [Snake Game]
 
