@@ -1,7 +1,5 @@
 #include <iostream>
 #include <string>
-
-// Include headers for Wordle and Snake Game
 #include "wordle.h"
 #include "snake.h"
 

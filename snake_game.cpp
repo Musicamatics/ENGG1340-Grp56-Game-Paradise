@@ -1,15 +1,9 @@
-//#include <ncurses.h>
 #include "snake.h"
 #include <iostream>
 using namespace std;
 
 void playSnakeGame() {
     srand(time(NULL));
-
-    //initscr();  // Initialize ncurses
-    //cbreak();   // Disable line buffering
-    //noecho();   // Turn off echo
-    //keypad(stdscr, TRUE);  // Enable function and arrow keys
 
     Game game;
     InitializeGame(game);
@@ -20,7 +14,14 @@ void playSnakeGame() {
         UpdateGame(game);
     }
 
-    //endwin();  // End ncurses mode
+    // Check if the current score exceeds the highest score
+    if (game.score > game.highestScore) {
+        std::cout << "Congratulations, you beat the previous highest score of " << game.highestScore << "!\n";
+        game.highestScore = game.score;  // Update the highest score
+        WriteHighestScore(game.highestScore);  // Save the new highest score
+    } else {
+        std::cout << "The highest score is " << game.highestScore << ".\n";
+    }
 
     std::cout << "Game Over! Press any key to exit." << std::endl;
     std::cin.get();

@@ -119,10 +119,4 @@ void playWordle() {
         }
     cout << "Bye!" << endl;
     };
-    
-    for (int i=0; i<tries.size(); i++){
-        //cout << tries[i] << ' ';
-    }
-    //cout << endl;
-    //return 0;
 }

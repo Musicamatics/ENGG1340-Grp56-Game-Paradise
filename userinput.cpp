@@ -6,41 +6,19 @@
 void UserInput(Game& game) {
     char ch;
     std::cin >> ch;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Ignore the rest of the line
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     switch (ch) {
         case 'w':
-            game.snake.ChangeDirection(Direction::UP);  // Use Direction::UP instead of Snake::UP
+            game.snake.ChangeDirection(Direction::UP); 
             break;
         case 's':
-            game.snake.ChangeDirection(Direction::DOWN);  // Use Direction::DOWN instead of Snake::DOWN
+            game.snake.ChangeDirection(Direction::DOWN);
             break;
         case 'a':
-            game.snake.ChangeDirection(Direction::LEFT);  // Use Direction::LEFT instead of Snake::LEFT
+            game.snake.ChangeDirection(Direction::LEFT);
             break;
         case 'd':
-            game.snake.ChangeDirection(Direction::RIGHT);  // Use Direction::RIGHT instead of Snake::RIGHT
+            game.snake.ChangeDirection(Direction::RIGHT);
             break;
     }
 }
-
-/*
-void UserInput(Game& game) {
-    int ch = getch();
-    if (ch != ERR) {
-        switch (ch) {
-            case 'w':
-                game.snake.ChangeDirection(Direction::UP);  // Use Direction::UP instead of Snake::UP
-                break;
-            case 's':
-                game.snake.ChangeDirection(Direction::DOWN);  // Use Direction::DOWN instead of Snake::DOWN
-                break;
-            case 'a':
-                game.snake.ChangeDirection(Direction::LEFT);  // Use Direction::LEFT instead of Snake::LEFT
-                break;
-            case 'd':
-                game.snake.ChangeDirection(Direction::RIGHT);  // Use Direction::RIGHT instead of Snake::RIGHT
-                break;
-        }
-    }
-}
-*/

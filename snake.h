@@ -36,7 +36,7 @@ struct Snake {
     
     void ChangeDirection(Direction newDirection);
     void EatFruit();
-    bool CheckCollision(const Game& game); // Now the compiler knows that Game is a type
+    bool CheckCollision(const Game& game);
     void Move();
 
     bool IsValidInput() const {
@@ -51,6 +51,7 @@ struct Game {
     int height;
     bool over;
     int score = 0;
+    int highestScore;
     Game() : over(false) {}
 };
 
@@ -62,5 +63,6 @@ void HandleUserInput(Game& game);
 void playSnakeGame();
 int SetDifficulty();
 void UserInput(Game& game);
+void WriteHighestScore(int highestScore);
 
 #endif

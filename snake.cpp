@@ -1,11 +1,29 @@
 #include "snake.h"
 //#include <ncurses.h>
 #include <iostream>
+#include <fstream> 
 using namespace std;
+
+// read the highest score from a file
+int ReadHighestScore() {
+    std::ifstream file("highest_score.txt");
+    if (!file) {
+        return 0;  // If the file doesn't exist, return 0
+    }
+    int highestScore;
+    file >> highestScore;
+    return highestScore;
+}
+
+// Write the highest score to a file
+void WriteHighestScore(int highestScore) {
+    std::ofstream file("highest_score.txt");
+    file << highestScore;
+    file.close();
+}
 
 Snake::Snake() 
     : direction(Direction::UP), ateFruit(false) {
-    // Initialize other members...
 }
 
 void Snake::EatFruit() {
@@ -25,55 +43,26 @@ void InitializeGame(Game& game) {
     // Initialize the fruit
     game.fruit.x = rand() % game.width;
     game.fruit.y = rand() % game.height;
+    
+    // Read the highest score
+    game.highestScore = ReadHighestScore();
 }
 
 void Snake::ChangeDirection(Direction newDirection) {
     // Don't allow the snake to reverse direction
-    /*
     if ((direction == Direction::UP && newDirection != Direction::DOWN) ||
         (direction == Direction::DOWN && newDirection != Direction::UP) ||
         (direction == Direction::LEFT && newDirection != Direction::RIGHT) ||
         (direction == Direction::RIGHT && newDirection != Direction::LEFT)) {
         direction = newDirection;
-    }
-    */
-    if ((direction == Direction::UP && newDirection != Direction::DOWN) ||
-        (direction == Direction::DOWN && newDirection != Direction::UP) ||
-        (direction == Direction::LEFT && newDirection != Direction::RIGHT) ||
-        (direction == Direction::RIGHT && newDirection != Direction::LEFT)) {
-        direction = newDirection;
-        validInput = true;  // Add this line
+        validInput = true; 
     } else {
-        validInput = false;  // Add this line
+        validInput = false;
     }
 }
 
 void Snake::Move() {
-    // Move the body
-    /* for (int i = body.size() - 1; i > 0; --i) {
-        body[i] = body[i - 1];
-    }
-    if (!body.empty()) {
-        body[0] = head;
-    }
-
-    // Move the head
-    switch (direction) {
-        case Direction::UP:
-            --head.y;
-            break;
-        case Direction::DOWN:
-            ++head.y;
-            break;
-        case Direction::LEFT:
-            --head.x;
-            break;
-        case Direction::RIGHT:
-            ++head.x;
-            break;
-    }
-    */
-   if (validInput) {  // Add this line
+   if (validInput) { 
         // Move the body
         for (int i = body.size() - 1; i > 0; --i) {
             body[i] = body[i - 1];
@@ -116,28 +105,6 @@ bool Snake::CheckCollision(const Game& game) {
     // No collision detected
     return false;
 }
-
-/*
-void UpdateGame(Game& game) {
-    game.snake.Move(); // Move the snake
-    if (game.snake.CheckCollision(game)) {
-        game.over = true;
-        return;
-    }
-
-    if (game.snake.head.x == game.fruit.x && game.snake.head.y == game.fruit.y) {
-        game.snake.EatFruit(); // Let the snake eat the fruit
-        game.score++;  // Increment the score
-        // Add a new segment to the snake's body (growing the snake)
-        Point newSegment = game.snake.body.empty() ? game.snake.head : game.snake.body.back();
-        game.snake.body.push_back(newSegment);
-
-        // Generate new coordinates for the fruit
-        game.fruit.x = rand() % game.width;
-        game.fruit.y = rand() % game.height;
-    }
-}
-*/
 
 void UpdateGame(Game& game) {
     if (game.snake.validInput) {
@@ -217,69 +184,5 @@ void RenderGame(const Game& game) {
         std::cout << "#";
     }
     std::cout << "\n";
-
     std::cout.flush();  // Flush the output buffer to show the changes
 }
-    
-    /*clear();  // Clear the screen
-
-    // Print the top border
-    for (int i = 0; i < game.width + 2; ++i) {
-        printw("#");
-    }
-    printw("\n");
-
-        // Clear the screen
-    for (int i = 0; i < 100; ++i) {
-        std::cout << "\n";
-    } */
-
-    // Print the top border
-    /* for (int i = 0; i < game.width + 2; ++i) {
-        std::cout << "#";
-    }
-    std::cout << "\n";
-
-    // Print the game board
-    for (int y = 0; y < game.height; ++y) {
-        printw("#");  // Print the left border
-        for (int x = 0; x < game.width; ++x) {
-            Point p = {x, y};
-            if (p == game.snake.head) {
-                printw("O");  // Print the snake's head
-            } else if (p == game.fruit) {
-                printw("F");  // Print the fruit
-            } else {
-                bool printed = false;
-                for (const Point& part : game.snake.body) {
-                    if (part != game.snake.head && p == part) {
-                        printw("o");  // Print the snake's body
-                        printed = true;
-                        break;
-                    }
-                }
-                if (!printed) {
-                    printw(" ");  // Print an empty space
-                }
-            }
-        }
-        printw("#\n");  // Print the right border and move to the next line
-    }
-
-    // Print the bottom border
-    for (int i = 0; i < game.width + 2; ++i) {
-        printw("#");
-    }
-    printw("\n");
-
-    refresh();  // Refresh the screen to show the changes
-} */
-
-
-
-/*int SetDifficulty() {
-   int difficulty;
-    std::cout << "Enter difficulty level (1-3): ";
-    std::cin >> difficulty;
-    return difficulty;
-}*/
