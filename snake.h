@@ -31,12 +31,17 @@ struct Snake {
     std::vector<Point> body;
     Direction direction;
     bool ateFruit;
+    bool validInput = true; // Added to check if the input is valid
     Snake();
-
+    
     void ChangeDirection(Direction newDirection);
     void EatFruit();
     bool CheckCollision(const Game& game); // Now the compiler knows that Game is a type
     void Move();
+
+    bool IsValidInput() const {
+        return validInput;
+    }
 };
 
 struct Game {
@@ -45,8 +50,8 @@ struct Game {
     int width;
     int height;
     bool over;
-
-    Game() : over(false) {} // Add this line
+    int score = 0;
+    Game() : over(false) {}
 };
 
 

@@ -1,10 +1,12 @@
 //#include <ncurses.h>
 #include "snake.h"
 #include <iostream>
+#include <limits>
 
 void UserInput(Game& game) {
     char ch;
     std::cin >> ch;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Ignore the rest of the line
     switch (ch) {
         case 'w':
             game.snake.ChangeDirection(Direction::UP);  // Use Direction::UP instead of Snake::UP

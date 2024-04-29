@@ -29,17 +29,28 @@ void InitializeGame(Game& game) {
 
 void Snake::ChangeDirection(Direction newDirection) {
     // Don't allow the snake to reverse direction
+    /*
     if ((direction == Direction::UP && newDirection != Direction::DOWN) ||
         (direction == Direction::DOWN && newDirection != Direction::UP) ||
         (direction == Direction::LEFT && newDirection != Direction::RIGHT) ||
         (direction == Direction::RIGHT && newDirection != Direction::LEFT)) {
         direction = newDirection;
     }
+    */
+    if ((direction == Direction::UP && newDirection != Direction::DOWN) ||
+        (direction == Direction::DOWN && newDirection != Direction::UP) ||
+        (direction == Direction::LEFT && newDirection != Direction::RIGHT) ||
+        (direction == Direction::RIGHT && newDirection != Direction::LEFT)) {
+        direction = newDirection;
+        validInput = true;  // Add this line
+    } else {
+        validInput = false;  // Add this line
+    }
 }
 
 void Snake::Move() {
     // Move the body
-    for (int i = body.size() - 1; i > 0; --i) {
+    /* for (int i = body.size() - 1; i > 0; --i) {
         body[i] = body[i - 1];
     }
     if (!body.empty()) {
@@ -61,6 +72,32 @@ void Snake::Move() {
             ++head.x;
             break;
     }
+    */
+   if (validInput) {  // Add this line
+        // Move the body
+        for (int i = body.size() - 1; i > 0; --i) {
+            body[i] = body[i - 1];
+        }
+        if (!body.empty()) {
+            body[0] = head;
+        }
+
+        // Move the head
+        switch (direction) {
+            case Direction::UP:
+                --head.y;
+                break;
+            case Direction::DOWN:
+                ++head.y;
+                break;
+            case Direction::LEFT:
+                --head.x;
+                break;
+            case Direction::RIGHT:
+                ++head.x;
+                break;
+        }
+    }
 }
 
 bool Snake::CheckCollision(const Game& game) {
@@ -80,9 +117,9 @@ bool Snake::CheckCollision(const Game& game) {
     return false;
 }
 
+/*
 void UpdateGame(Game& game) {
     game.snake.Move(); // Move the snake
-
     if (game.snake.CheckCollision(game)) {
         game.over = true;
         return;
@@ -90,7 +127,7 @@ void UpdateGame(Game& game) {
 
     if (game.snake.head.x == game.fruit.x && game.snake.head.y == game.fruit.y) {
         game.snake.EatFruit(); // Let the snake eat the fruit
-
+        game.score++;  // Increment the score
         // Add a new segment to the snake's body (growing the snake)
         Point newSegment = game.snake.body.empty() ? game.snake.head : game.snake.body.back();
         game.snake.body.push_back(newSegment);
@@ -100,15 +137,49 @@ void UpdateGame(Game& game) {
         game.fruit.y = rand() % game.height;
     }
 }
+*/
 
+void UpdateGame(Game& game) {
+    if (game.snake.validInput) {
+        game.snake.Move(); // Move the snake
+        if (game.snake.CheckCollision(game)) {
+            game.over = true;
+            return;
+        }
 
+        if (game.snake.head.x == game.fruit.x && game.snake.head.y == game.fruit.y) {
+            game.snake.EatFruit(); // Let the snake eat the fruit
+            game.score++;  // Increment the score
+            // Add a new segment to the snake's body (growing the snake)
+            Point newSegment = game.snake.body.empty() ? game.snake.head : game.snake.body.back();
+            game.snake.body.push_back(newSegment);
 
+            // Generate new coordinates for the fruit
+            game.fruit.x = rand() % game.width;
+            game.fruit.y = rand() % game.height;
+        }
+    } else {
+        // Reset validInput to true for the next round of input
+        game.snake.validInput = true;
+    }
+}
 
 void RenderGame(const Game& game) {
     // Print blank lines to separate the old and new board
     for (int i = 0; i < 50; ++i) {
         std::cout << "\n";
     }
+
+    // Print the instructions only the first time the game is rendered
+    static bool firstTime = true;
+    if (firstTime) {
+        std::cout << "Instructions: Press 'w', 'a', 's', or 'd' followed by Enter to move. \n";
+        std::cout << "Please press one key at a time. \n";
+        firstTime = false;
+    }
+
+    // Print the score
+    std::cout << "Score: " << game.score << "\n";
 
     // Print the upper border
     for (int i = 0; i < game.width + 2; ++i) {
