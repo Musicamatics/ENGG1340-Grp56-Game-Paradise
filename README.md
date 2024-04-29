@@ -100,6 +100,78 @@ We have separated the game logic into different modules for better organisation 
 
 This can enhance the functionality and complexity of the game while maintaining a structured and manageable codebase.
 
+### Dynamic Memory Management:
+
+In the Snake game, dynamic memory management is crucial for handling the snake's body as it grows when it eats fruits. The `std::vector<Point> body` within the `Snake` struct efficiently manages memory allocation and deallocation for the snake's body segments.
+
+**Feature Overview**:
+- When the snake eats a fruit, a new segment is added to its body, extending its length.
+- The `std::vector<Point>` automatically handles memory allocation and deallocation as the snake's body grows or shrinks.
+- Memory reallocation occurs transparently to the programmer, ensuring efficient usage of memory resources without manual intervention.
+
+**Corresponding Coding Element**:
+- Utilizing the `std::vector` container from the C++ Standard Library for dynamic array management.
+- The `std::vector` dynamically allocates memory as needed, resizing itself to accommodate new elements.
+
+**Example Implementation**:
+```cpp
+struct Snake {
+    Point head;
+    std::vector<Point> body; // Represents the snake's body
+    Direction direction;
+    bool ateFruit;
+    bool validInput = true; // Added to check if the input is valid
+
+    Snake(); // Constructor
+    
+    // Other member functions...
+
+    void EatFruit() {
+        // Add a new segment to the snake's body
+        // The vector automatically handles memory allocation
+        body.push_back(Point()); // Example: adding a new segment
+    }
+};
+```
+
+By leveraging the `std::vector` container, the program efficiently manages memory for the snake's body, ensuring scalability and robustness in handling dynamic changes in the game state. This feature contributes to the smooth and seamless gameplay experience of the Snake game.
+
+### File Input/Output:
+
+In the Snake game, file input/output is utilized to manage the highest score. The `ReadHighestScore` function reads the highest score from a file, while the `WriteHighestScore` function writes the highest score to a file. Both functions utilize the `std::ifstream` and `std::ofstream` classes from the C++ standard library for file input/output operations.
+
+**Code Overview**:
+- `ReadHighestScore`: Reads the highest score from the file "highest_score.txt". If the file doesn't exist, it returns 0.
+- `WriteHighestScore`: Writes the highest score to the file "highest_score.txt".
+
+**Corresponding Coding Element**:
+- Utilizing the `std::ifstream` and `std::ofstream` classes for file input/output operations.
+
+**Example Implementation**:
+```cpp
+// Read the highest score from a file
+int ReadHighestScore() {
+    std::ifstream file("highest_score.txt");
+    if (!file) {
+        return 0;  // If the file doesn't exist, return 0
+    }
+    int highestScore;
+    file >> highestScore;
+    return highestScore;
+}
+
+// Write the highest score to a file
+void WriteHighestScore(int highestScore) {
+    std::ofstream file("highest_score.txt");
+    file << highestScore;
+    file.close();
+}
+```
+
+These functions facilitate persistent storage of the highest score across game sessions, enhancing the gameplay experience by maintaining a record of the player's achievements.
+
+### Data structures for storing game status: The Game structure stores the game status, including the snake's position and direction, the fruit's position, and the score. The Snake structure uses a std::vector (an STL container) to store the body of the snake.
+
 ## Installation
 To compile the game, you need a C++ compiler that supports C++11. Here's the compilation command:
 
