@@ -174,6 +174,11 @@ These functions facilitate persistent storage of the highest score across game s
 The Game structure stores the game status, including the snake's position and direction, the fruit's position, and the score. The Snake structure uses a std::vector (an STL container) to store the body of the snake.
 
 ## Installation
+First, navigate to the directory containing the game files. Replace /path/to/game with the actual path to the game files on your system:
+```bash
+cd /path/to/game
+```
+
 To compile the game, you need a C++ compiler that supports C++11. Here's the compilation command:
 
 ```bash
