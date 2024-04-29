@@ -26,9 +26,9 @@ An implementation of the classic Snake Game, which originated as Blockade, an ar
 ## List of Features
 ### Wordle:
 
-### Snake Game:
+### [Snake Game]
 
-#### Input Validity:
+### Input Validity:
 To handle the validity of user input in the Snake game, several coding elements are employed:
 
 1. **UserInput Function in userinput.cpp**:
