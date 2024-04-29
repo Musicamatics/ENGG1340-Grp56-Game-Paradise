@@ -13,7 +13,7 @@
 #include <random>
 
 #define RESET "\033[0m"
-#define BLACK "\033[30m"              /* Black */
+#define BLACK "\033[30m"              /* Black */    /*define colours to be used in display*/
 #define RED "\033[31m"                /* Red */
 #define GREEN "\033[32m"              /* Green */
 #define YELLOW "\033[33m"             /* Yellow */
@@ -53,7 +53,7 @@
 
 using namespace std;
 
-struct dictPair{
+struct dictPair{        /*initializing struct of dictPair*/
     string dictword;
     int wordInt;
 };
