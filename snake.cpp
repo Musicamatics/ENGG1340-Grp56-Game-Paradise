@@ -1,5 +1,5 @@
 #include "snake.h"
-#include <ncurses.h>
+//#include <ncurses.h>
 #include <iostream>
 using namespace std;
 
@@ -105,13 +105,69 @@ void UpdateGame(Game& game) {
 
 
 void RenderGame(const Game& game) {
-    clear();  // Clear the screen
+    // Print blank lines to separate the old and new board
+    for (int i = 0; i < 50; ++i) {
+        std::cout << "\n";
+    }
+
+    // Print the upper border
+    for (int i = 0; i < game.width + 2; ++i) {
+        std::cout << "#";
+    }
+    std::cout << "\n";
+
+    for (int y = 0; y < game.height; ++y) {
+        std::cout << "#";  // Print the left border
+        for (int x = 0; x < game.width; ++x) {
+            Point p = {x, y};
+            if (p == game.snake.head) {
+                std::cout << "O";  // Print the snake's head
+            } else if (p == game.fruit) {
+                std::cout << "F";  // Print the fruit
+            } else {
+                bool printed = false;
+                for (const Point& part : game.snake.body) {
+                    if (part != game.snake.head && p == part) {
+                        std::cout << "o";  // Print the snake's body
+                        printed = true;
+                        break;
+                    }
+                }
+                if (!printed) {
+                    std::cout << " ";  // Print an empty space
+                }
+            }
+        }
+        std::cout << "#\n";  // Print the right border and move to the next line
+    }
+
+    // Print the bottom border
+    for (int i = 0; i < game.width + 2; ++i) {
+        std::cout << "#";
+    }
+    std::cout << "\n";
+
+    std::cout.flush();  // Flush the output buffer to show the changes
+}
+    
+    /*clear();  // Clear the screen
 
     // Print the top border
     for (int i = 0; i < game.width + 2; ++i) {
         printw("#");
     }
     printw("\n");
+
+        // Clear the screen
+    for (int i = 0; i < 100; ++i) {
+        std::cout << "\n";
+    } */
+
+    // Print the top border
+    /* for (int i = 0; i < game.width + 2; ++i) {
+        std::cout << "#";
+    }
+    std::cout << "\n";
 
     // Print the game board
     for (int y = 0; y < game.height; ++y) {
@@ -146,13 +202,13 @@ void RenderGame(const Game& game) {
     printw("\n");
 
     refresh();  // Refresh the screen to show the changes
-}
+} */
 
 
 
-int SetDifficulty() {
-    int difficulty;
+/*int SetDifficulty() {
+   int difficulty;
     std::cout << "Enter difficulty level (1-3): ";
     std::cin >> difficulty;
     return difficulty;
-}
+}*/
