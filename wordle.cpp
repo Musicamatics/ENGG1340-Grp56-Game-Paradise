@@ -188,16 +188,16 @@ void continuegame(int & currentTry,std::vector<std::string> & tries, std::vector
 void writefile(const int & numGame, const bool & match, const int & currentTry, const std::string & word, const int & present){    
     std::ofstream fout;
     if(numGame == 1){
-        fout.open("result.txt");
+        fout.open("result.txt"); /*create file if result.txt does not exist*/
     }
     else{
-        fout.open("result.txt", std::ios::app);
+        fout.open("result.txt", std::ios::app);    /*append to file result.txt*/
     }
     if(fout.fail()){
         exit(1);
     }
     bool complete = ((match == 1) || (currentTry == 6));
-    fout << numGame << " " << currentTry << " " << word << " " << match << " "  << complete << " " << present << "\n";
+    fout << numGame << " " << currentTry << " " << word << " " << match << " "  << complete << " " << present << "\n"; /*write result to file*/
     fout.close();
 }
 
@@ -214,20 +214,19 @@ void outfile(){
     }
     while(getline(fin, line)){
         std::istringstream iss(line);
-        iss >> numGame >> currentTry >> word >> match >> complete >> present;
+        iss >> numGame >> currentTry >> word >> match >> complete >> present; /*read output from file and store in variables*/
         std::cout << complete << " " << present << "\n";
         if(complete==1){
-            gamesComplete ++;
+            gamesComplete ++; /*calculate number of wordle completed*/
         }
         if(present != -1){
-            landmine++;
+            landmine++;    /*calculate number of mines triggered*/
         }
         if(match){
-            gamesWon ++;
+            gamesWon ++;    /*calculate number of games won*/
         }
     }
     fin.close();
-    std::cout << gamesComplete << " " << numGame << "\n";
     if(gamesComplete > 0){
         std::cout << "You've completed " << gamesComplete << " wordle puzzles! ";
         if(gamesComplete < numGame){
@@ -252,6 +251,4 @@ void outfile(){
     }
     std::cout << "Bye~\n";
     remove("result.txt");
-
-    
 }
