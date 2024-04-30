@@ -27,7 +27,7 @@ An implementation of the classic Snake Game, which originated as Blockade, an ar
 ## List of Features
 ### [Wordle]
 ### A. Input Validity
-To check whether user input word in Snake game is valid, the following coding elements are employed:
+To check whether user input word in Wordle game is valid, the following coding elements are employed:
 
 1. **isValid Function in wordle.cpp**
    - Returns true if user input.length() has exactly 5 letters, and has ASCII value between 65-90 (Uppercase) or 97-122 (lowercase)
