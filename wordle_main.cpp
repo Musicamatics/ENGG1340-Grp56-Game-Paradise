@@ -1,11 +1,10 @@
 #include "wordle.h"
 
-void playWordle() {
+int main() {
     bool match;
-    int len_of_words = 5;
     int num_of_tries = 6;
     int currentTry = 0;
-    int num_of_games = 0, score = 0;
+    int num_of_games = 0;
 
     std::vector<std::vector<char>> charr;
     std::vector<std::vector<bool>> found;
@@ -93,6 +92,7 @@ void playWordle() {
             num_of_games ++; 
             writefile(num_of_games, match, currentTry, word, present);
             continuegame(currentTry,tries, found, charr, match);
+            std::cout << num_of_games << "/n";
             if(input3 == "Y"){
                 continue;
             }
@@ -103,4 +103,5 @@ void playWordle() {
         }
     };
     outfile();
+    return 0;
 }
