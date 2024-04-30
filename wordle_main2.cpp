@@ -21,9 +21,11 @@ void gameInstructions(){
 
 void printResults(std::vector<std::vector<char>> & charr, std::vector<std::vector<bool>> & found, std::vector<std::string> & tries, const int & present){ /*printing out user input of tries*/
     std::cout << "*****************\n";
-    for (int i=0; i<charr.size(); i++){
+    int len1 = charr.size();
+    for (int i=0; i<len1; i++){
         std::cout << "| ";
-        for(int s=0; s<charr[i].size(); s++){
+        int len2 = charr[i].size();
+        for(int s=0; s<len2; s++){
             
             if((charr[i][s] == 'G') && (found[i][s] == 1)){ /*correct char and correct pos*/
                 std::cout << BLACK << B_GREEN;
@@ -32,7 +34,8 @@ void printResults(std::vector<std::vector<char>> & charr, std::vector<std::vecto
                 std::cout << BLACK << B_YELLOW;
             }
             else{   
-                if(i == charr.size()-1 && s == present){
+                int len3 = charr.size() - 1;
+                if(i == len3 && s == present){
                     std::cout << BLACK << B_MAGENTA;
                 }
                 else{
