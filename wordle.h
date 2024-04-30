@@ -1,7 +1,9 @@
+// gcd.h
 #ifndef WORDLE_H
 #define WORDLE_H
 #include <string>
 #include <iostream>
+#include <sstream>
 #include <stdlib.h>
 #include <cstdlib>
 #include <fstream>
@@ -10,9 +12,10 @@
 #include <map>
 #include <list>
 #include <random>
+#include <unistd.h>
 
 #define RESET "\033[0m"
-#define BLACK "\033[30m"              /* Black */    /*define colours to be used in display*/
+#define BLACK "\033[30m"              /* Black */
 #define RED "\033[31m"                /* Red */
 #define GREEN "\033[32m"              /* Green */
 #define YELLOW "\033[33m"             /* Yellow */
@@ -31,27 +34,35 @@
 #define B_WHITE   "\033[47m"    /* White */
 #define B_GRAY "\033[47m"      /* Gray */
 
-using namespace std;
-
-struct dictPair{        /*initializing struct of dictPair*/
-    string dictword;
+struct dictPair{
+    std::string dictword;
     int wordInt;
 };
+
+void gameInstructions();
+void wordOverlap(bool & overlapWord, const char & randletter, const std::string & word);
+void triggerLandmine(const char & randletter);
+void endgame(const int & currentTry);
+void earlyEndgame(const int & currentTry, const std::string & input2, const int & present, const std::string & word, const bool & match);
+void continuegame(int & currentTry,std::vector<std::string> & tries, std::vector<std::vector<bool>> & found, std::vector<std::vector<char>> & charr, bool & match);
+void final(const int & score);
 bool operator<(const dictPair& a, const dictPair& b);
-bool loaddict(const string & file, map<dictPair, string> & mydict);
-void toLowerCase(string & input);
-dictPair generateword(map<dictPair, string> & mapdict);
-bool isValid(string input);
-bool testingdoWordsMatch(string s1, string s2);
-void testingfindGs(string s1,string s2, vector<char> & charword, vector<bool> & found);
-void charprinting(vector<char> & charr);
-void boolprinting(vector<bool> & found);
-void wordprinting( string line);
-void testingfindYs(string s1,string s2, vector<char> & charr, vector<bool> & found);
-void playwordle(string word, string input, vector<vector<char>> & charr, vector<vector<bool>> & found, int currentTry, vector<string> & tries);
-void printResults(vector<vector<char>> & charr, vector<vector<bool>> & found, vector<string> & tries);
-bool dictword(string curr_word, map<dictPair, string> & mapdict);
+bool loaddict(const std::string & file, std::map<dictPair, std::string> & mydict);
+void toLowerCase(std::string & input);
+dictPair generateword(std::map<dictPair, std::string> & mapdict);
+bool isValid(std::string input);
+bool testingdoWordsMatch(std::string s1, std::string s2);
+void testingfindGs(std::string s1, std::string s2, std::vector<char> & charword, std::vector<bool> & found);
+void charprinting(std::vector<char> & charr);
+void boolprinting(std::vector<bool> & found);
+void wordprinting(std::string line);
+void testingfindYs(std::string s1, std::string s2, std::vector<char> & charr, std::vector<bool> & found);
+void playwordle(std::string word, std::string input, std::vector<std::vector<char>> & charr, std::vector<std::vector<bool>> & found, int currentTry, std::vector<std::string> & tries);
+void printResults(std::vector<std::vector<char>> & charr, std::vector<std::vector<bool>> & found, std::vector<std::string> & tries, const int & present);
+bool dictword(std::string curr_word, std::map<dictPair, std::string> & mapdict);
 char generateChar();
-bool wordpresent(char letter, string input);
+int wordpresent(char letter, std::string input);
+void writefile(const int & numGame, const bool & match, const int & currentTry, const std::string & word, const int & present);
+void outfile();
 
 #endif
