@@ -63,5 +63,5 @@ char generateChar();
 int wordpresent(char letter, std::string input);
 void writefile(const int & numGame, const bool & match, const int & currentTry, const std::string & word, const int & present);
 void outfile();
-
+void playWordle();
 #endif
