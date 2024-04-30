@@ -203,6 +203,18 @@ These functions allow the maintainence of the records of the player's achievemen
 
 ### F. Data structures for storing game status:
 The dictPair structure stores the valid 5-letter word and its corresponding index, which is stored with a std:map (an STL container).
+### G. Changing color of text in terminal:
+Escape sequences specific to ANSI escape codes are used to control color of text in the terminal. Macros are defined as escape sequences which set the text colour, foreground text color to specified color. 
+1. **Type of escape sequences**
+   - RESET macro reset text attributes to default values
+   - BLACK or other text color macro set foreground text color to desired color. Any text output that follows this escape sequence will be displayed in black until another color escape sequence is encountered or the color is reset using the RESET escape sequence
+2. **Implementation**
+```cpp
+#define RESET "\033[0m"   /* Reset */
+#define BLACK "\033[30m"   /* Black text */
+#define B_GREEN   "\033[42m"    /* Green background */
+```
+- The escape sequences above allow the text output to display specific coloured tiles.
 
 ### [Snake Game]
 ### A. Input Validity:
