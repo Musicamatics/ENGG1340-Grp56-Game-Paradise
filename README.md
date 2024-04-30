@@ -371,7 +371,7 @@ cd /path/to/game
 To compile the game, you need a C++ compiler that supports C++11. Here's the compilation command:
 
 ```bash
-g++ -std=c++11 main.cpp wordle_main.cpp wordle.cpp snake_game.cpp Snake.cpp userinput.cpp -o game_paradise
+g++ -std=c++11 main.cpp wordle.cpp wordle_main.cpp wordle_main2.cpp snake_game.cpp Snake.cpp userinput.cpp -o game_paradise
 ```
 
 To start the game, execute the following command:
