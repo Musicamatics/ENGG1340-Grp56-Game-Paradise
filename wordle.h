@@ -1,4 +1,3 @@
-// gcd.h
 #ifndef WORDLE_H
 #define WORDLE_H
 #include <string>
@@ -56,7 +55,7 @@ void testingfindGs(std::string s1, std::string s2, std::vector<char> & charword,
 void charprinting(std::vector<char> & charr);
 void boolprinting(std::vector<bool> & found);
 void wordprinting(std::string line);
-void testingfindYs(std::string s1, std::string s2, std::vector<char> & charr, std::vector<bool> & found);
+void testingfindYs(std::string s1, std::vector<char> & charr);
 void playwordle(std::string word, std::string input, std::vector<std::vector<char>> & charr, std::vector<std::vector<bool>> & found, int currentTry, std::vector<std::string> & tries);
 void printResults(std::vector<std::vector<char>> & charr, std::vector<std::vector<bool>> & found, std::vector<std::string> & tries, const int & present);
 bool dictword(std::string curr_word, std::map<dictPair, std::string> & mapdict);
@@ -64,5 +63,5 @@ char generateChar();
 int wordpresent(char letter, std::string input);
 void writefile(const int & numGame, const bool & match, const int & currentTry, const std::string & word, const int & present);
 void outfile();
-void playWordle();
+
 #endif
