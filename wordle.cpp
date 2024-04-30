@@ -35,7 +35,6 @@ bool loaddict(const string & file, map<dictPair, string> & mydict){ /*for genera
         }
     }
 
-    //cout << num << endl;
     filed.close();
     return true;
 }
@@ -62,8 +61,6 @@ dictPair generateword(map<dictPair, string> & mapdict){ /*generate random word*/
             string word = k.dictword;
             d.dictword = word;
         }
-        //ignore value
-        //Value v = iter->second;
     }
     return d;
 }
