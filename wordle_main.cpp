@@ -1,6 +1,6 @@
 #include "wordle.h"
 
-int main() {
+playwordle() {
     bool match;
     int len_of_words = 5;
     int num_of_tries = 6;
