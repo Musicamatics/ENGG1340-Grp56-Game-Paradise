@@ -227,7 +227,6 @@ void outfile(){
         }
     }
     fin.close();
-    std::cout << gamesComplete << " " << numGame << "\n";
     if(gamesComplete > 0){
         std::cout << "You've completed " << gamesComplete << " wordle puzzles! ";
         if(numGame - gamesComplete - landmine > 0){
