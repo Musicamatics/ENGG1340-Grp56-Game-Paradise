@@ -98,7 +98,7 @@ void testingfindYs(std::string s1,std::string s2, std::vector<char> & charr, std
 }
 /*if 'Y' indicating presence of user char in wrong position overlaps with 'G' in another position 
 indicating correct position char match, remove 'Y' of a lower priority*/
-void testingfindYys(std::string s1, std::string s2, std::vector<char> & charr, std::vector<bool> & found){   /*removing extra Ys in char array*/
+void testingfindYys(std::string s1, std::vector<char> & charr){   /*removing extra Ys in char array*/
     for(int s=0; s<5; s++){
         for (int g=0; g<5; g++){
             if (((s1[s] == s1[g]) && (s!=g)) && ((charr[s] == 'Y') && (charr[g] == 'G'))){ 
@@ -111,7 +111,7 @@ void testingfindYys(std::string s1, std::string s2, std::vector<char> & charr, s
 void playwordle(std::string word, std::string input, std::vector<std::vector<char>> & charr, std::vector<std::vector<bool>> & found, int currentTry, std::vector<std::string> & tries){
     for(int i=0; i<6; i++){
         if(i == currentTry){
-            int bsize = charr.size(), asize = 0;    /*generate char vector and bool vector for each word in vector of words*/
+        /*generate char vector and bool vector for each word in vector of words*/
             std::vector<char> charrword;
             std::vector<bool> foundword;
             for (int s=0; s<5; s++){
@@ -120,11 +120,10 @@ void playwordle(std::string word, std::string input, std::vector<std::vector<cha
             }
             charr.push_back(charrword); /*store initialized char and bool vector for each word in larger vecttor for whole game*/
             found.push_back(foundword);
-            asize = charr.size();
             tries.push_back(input);
             testingfindGs(word, input, charr[i], found[i]); /*storing values of 'G' and 1/0*/
             testingfindYs(word, input, charr[i], found[i]); /*storing values of 'Y' and 1/0*/
-            testingfindYys(word, input, charr[i], found[i]); /*removing extra 'Y'*/
+            testingfindYys(word, charr[i]); /*removing extra 'Y'*/
         }
     }
 };
@@ -155,7 +154,8 @@ char generateChar(){    /*generate random letter landmine*/
 }
 
 int wordpresent(char letter, std::string input){    /*check if landmine letter is present in word*/
-    for(int i=0; i<input.length(); i++){
+    int len = input.length();
+    for(int i=0; i<len; i++){
         if (input[i] == letter){    /*if landmine matches char in user input word*/
             return i;
         }
@@ -165,8 +165,8 @@ int wordpresent(char letter, std::string input){    /*check if landmine letter i
 
 void wordOverlap(bool & overlapWord, const char & randletter, const std::string & word){
     overlapWord = false; 
-    int count = 0;
-    for(int i=0; i < word.length(); i++){
+    int count = 0, len=word.length();
+    for(int i=0; i < len; i++){
         if(randletter == word[i]){
         count ++;
         }
@@ -227,6 +227,7 @@ void outfile(){
         }
     }
     fin.close();
+    std::cout << gamesComplete << " " << numGame << "\n";
     if(gamesComplete > 0){
         std::cout << "You've completed " << gamesComplete << " wordle puzzles! ";
         if(numGame - gamesComplete - landmine > 0){
