@@ -17,7 +17,8 @@ This is a simple implementation of two classic games: Wordle and Snake, programm
 ## Description
 
 ### Wordle:
-A replica of the "Wordle" game, originally published by the New York Times. In this game, you have 6 chances to guess a 5-letter word. Guess wisely and good luck! Detailed instructions are provided within the program.
+A replica of the "Wordle" game, originally published by the New York Times. In this game, you have 6 chances to guess a 5-letter word. Guess wisely and good luck! But there's a twist! If you accidentally used one of the letters that was randomized to be a landmine, you will loose this game immediately!
+Detailed instructions are provided within the program.
 
 ### Snake Game:
 An implementation of the classic Snake Game, which originated as Blockade, an arcade video game by Gremlin Industries. You control a snake moving around the board, eating fruits that appear at random locations. Each fruit eaten earns you 1 point. The game ends when the snake collides with the board boundary or its own body. Use 'w', 'a', 's', or 'd' followed by Enter to move the snake. Note: only one key press is considered per input.
@@ -25,9 +26,67 @@ An implementation of the classic Snake Game, which originated as Blockade, an ar
 
 ## List of Features
 ### [Wordle]
+### A. Input Validity
+To check whether user input word in Snake game is valid, the following coding elements are employed:
 
+1. **isValid Function in wordle.cpp**
+   ```cpp
+   - Returns true if user input.length() has exactly 5 letters, and has ASCII value between 65-90 (Uppercase) or 97-122 (lowercase)
+   - This function checks whether user input contain non-letter elements or has >5 or <5 letters
+2. **toLowerCase Function in wordle.cpp**
+   - This function converts user input letters in the Upper case to lower case letters by adding 'a' - 'A' difference to input with typecasting
+3. **dictWord Function in wordle.cpp**
+   ```cpp
+    std::map<dictPair,string>::iterator it; /*initialize map iterator*/
+    dictPair d;
+    for(std::map<dictPair, string>::iterator iter = mapdict.begin(); iter != mapdict.end(); ++iter){
+        dictPair k =  iter->first;
+        if(k.dictword == curr_word){    /*if user input word matches word string stored in key dictPair of dictionary*/
+            d.wordInt = k.wordInt;
+            d.dictword = curr_word;
+        }
+    }
+    return mapdict.count(d);
+   ```
+   - Key pair of dict is iterated through to find matching valid word stored in mapdict, stored in a dictPair struct 
+   - mapdict.count(d) checks if dictPair key exist in dictionary, returns true if present and false if not present
+### B. Random word and char generation
+To generate random word for each game of wordle and a random char as landmine letter:
+1. ***generateword Function in wordle.cpp**:
+   ```cpp
+    int N = mapdict.size()-1;
+    int num = 0;
+    random_device rd;
+    mt19937 e2(rd());
+    uniform_int_distribution<int> dist(1,N);
+    num = dist(e2);
+
+   /*iterate through key of dictionary only to find word in key value*/
+   ```
+   - generate random integer within range of size of dictionary, using a pseudo random number generator across uniform distribution
+   - random integer generated is then used to extract valid word within key of dictionary through iteration
+2. **generatechar Function in wordle.cpp**:
+   ```cpp
+   /*same random number generator used in generateword Function*/
+   char num = 'a';
+   num += n;
+   /*type casting to return random generated integer as char*/
+   ```
+   - generate random integer within number of alphabets, using a pseudo random number generator across uniform distribution
+   - random integer generated is then used to return a random letter
+### C. Program Codes in Multiple Files:
+The game files have been separated into different modules for better organisation and modularity.
+**Implementation**:
+     - `wordle.cpp` for game execution logic
+     - `wordle_main2.cpp` for managing output to screen
+     - `wordle_main.cpp` for the main game loop and rendering
+     - `wordle.h` for header declarations and definitions
+
+### D. Dynamic Memory Management:
+Handling and storing user inputted words is essential for output of wordle gameboard, allowing players to keep track which letters were correct or wrong.
+1. **Implementation**
+2. 
 ### [Snake Game]
-
 ### A. Input Validity:
 To handle the validity of user input in the Snake game, several coding elements are employed:
 
