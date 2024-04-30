@@ -93,7 +93,6 @@ int main() {
             num_of_games ++; 
             writefile(num_of_games, match, currentTry, word, present);
             continuegame(currentTry,tries, found, charr, match);
-            std::cout << num_of_games << "/n";
             if(input3 == "Y"){
                 continue;
             }
