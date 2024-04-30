@@ -50,6 +50,18 @@ To check whether user input word in Snake game is valid, the following coding el
    ```
    - Key pair of dict is iterated through to find matching valid word stored in mapdict, stored in a dictPair struct 
    - mapdict.count(d) checks if dictPair key exist in dictionary, returns true if present and false if not present
+4. **Switch statement used for result output**
+- Switch statements used for choosing which sentence to compliment for users when they succeed in solving the puzzle
+```cpp
+switch(currentTry){   /*number of tries needed to solve wordle*/
+        case 1: cout << "Genius!"; break;
+        case 2: cout << "Magnificent!"; break;
+        case 3: cout << "Impressive!"; break;
+        case 4: cout << "Splendid!"; break;
+        case 5: cout << "Great!"; break;
+        case 6: cout << "Phew!"; break;
+        }
+```
 ### B. Random word and char generation
 To generate random word for each game of wordle and a random char as landmine letter:
 1. ***generateword Function in wordle.cpp**:
@@ -79,13 +91,116 @@ The game files have been separated into different modules for better organisatio
 **Implementation**:
      - `wordle.cpp` for game execution logic
      - `wordle_main2.cpp` for managing output to screen
-     - `wordle_main.cpp` for the main game loop and rendering
+     - `wordle_main.cpp` for the main game loop
      - `wordle.h` for header declarations and definitions
 
 ### D. Dynamic Memory Management:
-Handling and storing user inputted words is essential for output of wordle gameboard, allowing players to keep track which letters were correct or wrong.
-1. **Implementation**
-2. 
+Creation of map of dictionary of valid 5-letter words. Handling and storing user inputted words is essential for output of wordle gameboard, allowing players to keep track which letters were correct or wrong.
+
+**Feature Overview**
+1. **Use of 2-D vectors to keep track of matched letters**
+   - when comparing user input and correct word, each of the matching letters of user input are stored as an item in a 1-D char vector with the value of 'G' indicating an exact match in the right place, or 'Y' which is a match but in the wrong place.
+   - 1-D char vectors of each word are then stored as an item in another 1-D vector to form a 2-D vector
+2. **Use of 1-D vectors to keep track of user input**
+   - User input words are stored as items in a vector for each round of the wordle game
+3. **Use of map to create dictionary of valid 5-letter words**
+   - Valid 5-letter words which are non-specific are stored in map, with struct containing valid word and index as key and valid word as value
+**Corresponding Coding Element**:
+- `std::vector` and `std::map` containers from the C++ Standard Library are used for dynamic array management.
+- The `std::vector` dynamically allocates memory as needed, resizing itself to accommodate new elements.
+
+**Implementation**:
+```cpp
+for(int i=0; i<6; i++){
+        if(i == currentTry){
+            vector<char> charrword;    /*generate char vector and bool vector for each word in vector of words*/
+            vector<bool> foundword;
+            for (int s=0; s<5; s++){
+                charrword.push_back('\0');  /*initializing char and bool vector*/
+                foundword.push_back(0);
+            }
+            charr.push_back(charrword); /*store initialized char and bool vector for each word in larger vecttor for whole game*/
+            found.push_back(foundword);
+            tries.push_back(input);   /*storing user input*/
+            /*storing values of 'G' and 1/0*/ 
+            /*storing values of 'Y' and 1/0*/
+        }
+    }
+```
+- Conversion of user input word string into char and boolean vectors allow for clear output of coloured tiles indicating matched letters in user interface, making the game more enjoyable.
+
+```cpp
+bool loaddict(const string & file, map<dictPair, string> & mydict){ /*for generating dictionary with 5 letter words only and non-specific terms only*/
+    string word;
+    ifstream filed{file};
+    int num=0;
+    dictPair d;
+    if(filed.is_open()){
+        while (getline(filed, word)){
+            if((word.length() == 5) && !isupper(word[0])){
+                d.wordInt = num;   /*creating struct dictPair index value*/
+                d.dictword = word;   /*creating struct dictPair string value*/
+                mydict[d] = d.wordInt;   /*storing value of corresponding key struct*/
+                num++;
+            }
+        }
+    }
+    filed.close();
+    return true;
+}
+```
+- dictionary is created to extract word for guessing and for checking if user input is valid
+
+### E. File Input/Output
+In Wordle, file input/output is utilized to keep track of their performance in previous games. The `writefile` function writes the number of tries of each wordle game, completedness and its success or failure to a file, while the `outfile` function writes the highest score to a file. The `writefile` function utilize the `std::ofstream` classes from the C++ standard library for file input/output operations, while `outfile` utilizes the `std::ifstream` and `std::istringstream` classes.
+
+**Code Overview**:
+- `writefile`: Writes the current number of wordle games played, the number of tries taken to guess the word, the boolean value indicating sucess of solving wordle, and another boolean value for whether or not the landmine letter was triggered.
+
+- `outfile`: Reads the past records of previous wordle puzzles and print out total number of wordle puzzles played, percentage of wordles completed and players' rate of success.
+
+**Corresponding Coding Element**:
+- Utilizing the `std::ifstream`, `std::ofstream` and `std::istringstream` classes for file input/output operations and extracting data from a string.
+
+**Implementation**:
+```cpp
+// Write the results of the previous wordle game to a text file
+ofstream fout;
+    if(numGame == 1){
+        fout.open("result.txt");
+    }
+    else{
+        fout.open("result.txt", ios::app);
+    }
+    bool complete = (match || currentTry == 6);
+    fout << numGame << " " << currentTry << " " << word << " " << match << " "  << complete << " " << present << endl;
+    fout.close();
+
+// Read the records of each wordle game stored in text file and output to screen at the end of the game
+void outfile(){
+    ifstream fin;
+    int numGame=1, currentTry, gamesComplete=0, gamesWon=0, present=-1;
+    bool match, complete;
+    string line, word;
+    
+    char filename[80] = "result.txt";
+    fin.open(filename);
+    while(getline(fin, line)){
+        istringstream iss(line);
+        iss >> numGame >> currentTry >> word >> match >> complete >> present;
+         /*calculate percentage of wordle puzzles solved and completeness*/
+    }
+    fin.close();
+```
+
+These functions allow the maintainence of the records of the player's achievements in solving wordle puzzles for a final display at the end of the game.
+
+### F. Data structures for storing game status:
+The Game structure stores the game status, including the snake's position and direction, the fruit's position, and the score. The Snake structure uses a std::vector (an STL container) to store the body of the snake.
+
+**Note:** This game is recommended for Linux environments.
+
+
 ### [Snake Game]
 ### A. Input Validity:
 To handle the validity of user input in the Snake game, several coding elements are employed:
